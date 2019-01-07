@@ -1,7 +1,8 @@
 ".\Objects\STARTUP.obj",
 ".\Objects\main.obj",
 ".\Objects\delay.obj",
-".\Objects\gpio.obj" 
+".\Objects\gpio.obj",
+".\Objects\lcd1602.obj" 
 TO ".\Objects\BasicC51" 
 
 PRINT(".\Listings\BasicC51.map") REMOVEUNUSED 

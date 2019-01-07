@@ -3,6 +3,13 @@
 
 #include "intdef.h"
 
+#define HIGH	1
+#define LOW		0
+
+#define LSBFIRST	1
+#define MSBFIRST	0
+
+
 typedef enum enPin
 {
 	P0_0 = 0, P0_1 = 1, P0_2 = 2, P0_3 = 3, P0_4 = 4, P0_5 = 5, P0_6 = 6, P0_7 = 7,

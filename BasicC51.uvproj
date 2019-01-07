@@ -401,6 +401,11 @@
               <FileType>1</FileType>
               <FilePath>.\gpio.c</FilePath>
             </File>
+            <File>
+              <FileName>lcd1602.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\lcd1602.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -420,6 +425,11 @@
               <FileName>gpio.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\gpio.h</FilePath>
+            </File>
+            <File>
+              <FileName>lcd1602.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\lcd1602.h</FilePath>
             </File>
           </Files>
         </Group>

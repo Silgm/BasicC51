@@ -7,3 +7,7 @@ void delay_ms(uint16_t ms)
 		for (i = 0; i < DELAY_FACTOR; ++i);
 }
 
+void delay_us(uint16_t us)
+{
+	for (; us; --us);
+}

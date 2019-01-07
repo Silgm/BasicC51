@@ -1,0 +1,181 @@
+C51 COMPILER V9.59.0.0   LCD1602                                                           01/07/2019 22:17:13 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE LCD1602
+OBJECT MODULE PLACED IN .\Objects\lcd1602.obj
+COMPILER INVOKED BY: D:\Program Files (x86)\Keil_v5\C51\BIN\C51.EXE lcd1602.c LARGE OMF2 OPTIMIZE(8,SPEED) BROWSE DEBUG 
+                    -PRINT(.\Listings\lcd1602.lst) OBJECT(.\Objects\lcd1602.obj)
+
+line level    source
+
+   1          #include "lcd1602.h"
+   2          
+   3          #define MODE_DATA       1
+   4          #define MODE_CMD        0
+   5          
+   6          
+   7          
+   8          static void s_Lcd1602_pluseEnable(const Lcd1602 *lcd)
+   9          {
+  10   1              digitalWrite(lcd->enable, LOW);
+  11   1              digitalWrite(lcd->enable, HIGH);
+  12   1              digitalWrite(lcd->enable, LOW);
+  13   1              delay_us(100);
+  14   1      }
+  15          
+  16          static void s_Lcd1602_Write(const Lcd1602 *lcd, const uint8_t value, const uint8_t mode)
+  17          {
+  18   1              digitalWrite(lcd->rs, mode);
+  19   1      
+  20   1              //write4bits(value>>4);
+  21   1              digitalWrite(lcd->d4, ((value >> 4) >> 0) & 0x01);
+  22   1              digitalWrite(lcd->d5, ((value >> 4) >> 1) & 0x01);
+  23   1              digitalWrite(lcd->d6, ((value >> 4) >> 2) & 0x01);
+  24   1              digitalWrite(lcd->d7, ((value >> 4) >> 3) & 0x01);
+  25   1              s_Lcd1602_pluseEnable(lcd);
+  26   1      
+  27   1              //write4bits(value);
+  28   1              digitalWrite(lcd->d4, (value >> 0) & 0x01);
+  29   1              digitalWrite(lcd->d5, (value >> 1) & 0x01);
+  30   1              digitalWrite(lcd->d6, (value >> 2) & 0x01);
+  31   1              digitalWrite(lcd->d7, (value >> 3) & 0x01);
+  32   1      
+  33   1              s_Lcd1602_pluseEnable(lcd);
+  34   1      }
+  35          
+  36          
+  37          void Lcd1602_Create(Lcd1602 *lcd, 
+  38                  Pin rs, 
+  39                  Pin enable, 
+  40                  Pin d4,
+  41                  Pin d5,
+  42                  Pin d6,
+  43                  Pin d7)
+  44          {
+  45   1              lcd->rs = rs;
+  46   1              lcd->enable = enable;
+  47   1              lcd->d4 = d4;
+  48   1              lcd->d5 = d5;
+  49   1              lcd->d6 = d6;
+  50   1              lcd->d7 = d7;
+  51   1      }
+  52          
+  53          void Lcd1602_init(Lcd1602 *lcd)
+  54          {
+C51 COMPILER V9.59.0.0   LCD1602                                                           01/07/2019 22:17:13 PAGE 2   
+
+  55   1              lcd->_displayfunction = LCD_4BITMODE | LCD_2LINE | LCD_5x8DOTS;                         //
+  56   1              s_Lcd1602_Write(lcd, LCD_FUNCTIONSET | lcd->_displayfunction, MODE_CMD);        //
+  57   1              
+  58   1              lcd->_displaycontrol = LCD_DISPLAYON | LCD_CURSOROFF | LCD_BLINKOFF;
+  59   1              Lcd1602_display(lcd);
+  60   1              Lcd1602_clear(lcd);
+  61   1              lcd->_displaymode = LCD_ENTRYLEFT | LCD_ENTRYSHIFTDECREMENT;
+  62   1              s_Lcd1602_Write(lcd, LCD_ENTRYMODESET | lcd->_displaymode, MODE_CMD);
+  63   1      }
+  64          
+  65          void Lcd1602_setCursor(Lcd1602 *lcd, uint8_t col, uint8_t row)
+  66          {
+  67   1              if (row)
+  68   1                      s_Lcd1602_Write(lcd, LCD_SETDDRAMADDR | (col), MODE_CMD);       
+  69   1              else
+  70   1                      s_Lcd1602_Write(lcd, LCD_SETDDRAMADDR | (col + 0x40), MODE_CMD);        
+  71   1      }
+  72          
+  73          void Lcd1602_print(Lcd1602 *lcd, const char *str)
+  74          {
+  75   1              for (; *str; ++str)
+  76   1                      s_Lcd1602_Write(lcd, *str, MODE_DATA);
+  77   1      }
+  78          
+  79          void Lcd1602_clear(Lcd1602 *lcd)
+  80          {
+  81   1              s_Lcd1602_Write(lcd, LCD_CLEARDISPLAY, MODE_CMD);  // clear display, set cursor position to zero
+  82   1              delay_us(2000);  // this command takes a long time!
+  83   1      }
+  84          void Lcd1602_home(Lcd1602 *lcd)
+  85          {
+  86   1              s_Lcd1602_Write(lcd, LCD_RETURNHOME, MODE_CMD);  // set cursor position to zero
+  87   1              delay_us(2000);  // this command takes a long time!
+  88   1      }
+  89          
+  90          void Lcd1602_noDisplay(Lcd1602 *lcd)
+  91          {
+  92   1              lcd->_displaycontrol &= ~LCD_DISPLAYON;
+  93   1              s_Lcd1602_Write(lcd, LCD_DISPLAYCONTROL | lcd->_displaycontrol, MODE_CMD);
+  94   1      }
+  95          void Lcd1602_display(Lcd1602 *lcd)
+  96          {
+  97   1              lcd->_displaycontrol |= LCD_DISPLAYON;
+  98   1              s_Lcd1602_Write(lcd, LCD_DISPLAYCONTROL | lcd->_displaycontrol, MODE_CMD);
+  99   1      }
+ 100          void Lcd1602_noBlink(Lcd1602 *lcd)
+ 101          {
+ 102   1              lcd->_displaycontrol &= ~LCD_BLINKON;
+ 103   1              s_Lcd1602_Write(lcd, LCD_DISPLAYCONTROL | lcd->_displaycontrol, MODE_CMD);
+ 104   1      }
+ 105          void Lcd1602_blink(Lcd1602 *lcd)
+ 106          {
+ 107   1              lcd->_displaycontrol |= LCD_BLINKON;
+ 108   1              s_Lcd1602_Write(lcd, LCD_DISPLAYCONTROL | lcd->_displaycontrol, MODE_CMD);
+ 109   1      }
+ 110          void Lcd1602_noCursor(Lcd1602 *lcd)
+ 111          {
+ 112   1              lcd->_displaycontrol &= ~LCD_CURSORON;
+ 113   1              s_Lcd1602_Write(lcd, LCD_DISPLAYCONTROL | lcd->_displaycontrol, MODE_CMD);
+ 114   1      }
+ 115          void Lcd1602_cursor(Lcd1602 *lcd)
+ 116          {
+C51 COMPILER V9.59.0.0   LCD1602                                                           01/07/2019 22:17:13 PAGE 3   
+
+ 117   1              lcd->_displaycontrol |= LCD_CURSORON;
+ 118   1              s_Lcd1602_Write(lcd, LCD_DISPLAYCONTROL | lcd->_displaycontrol, MODE_CMD);
+ 119   1      }
+ 120          
+ 121          void Lcd1602_scrollDisplayLeft(Lcd1602 *lcd)
+ 122          {
+ 123   1              s_Lcd1602_Write(lcd, LCD_CURSORSHIFT | LCD_DISPLAYMOVE | LCD_MOVELEFT, MODE_CMD);
+ 124   1      }
+ 125          void Lcd1602_scrollDisplayRight(Lcd1602 *lcd)
+ 126          {
+ 127   1              s_Lcd1602_Write(lcd, LCD_CURSORSHIFT | LCD_DISPLAYMOVE | LCD_MOVERIGHT, MODE_CMD);
+ 128   1      }
+ 129          void Lcd1602_leftToRight(Lcd1602 *lcd)
+ 130          {
+ 131   1              lcd->_displaymode |= LCD_ENTRYLEFT;
+ 132   1              s_Lcd1602_Write(lcd, LCD_ENTRYMODESET | lcd->_displaymode, MODE_CMD);
+ 133   1      }
+ 134          void Lcd1602_rightToLeft(Lcd1602 *lcd)
+ 135          {
+ 136   1              lcd->_displaymode &= ~LCD_ENTRYLEFT;
+ 137   1              s_Lcd1602_Write(lcd, LCD_ENTRYMODESET | lcd->_displaymode, MODE_CMD);
+ 138   1      }
+ 139          void Lcd1602_autoscroll(Lcd1602 *lcd)
+ 140          {
+ 141   1              lcd->_displaymode |= LCD_ENTRYSHIFTINCREMENT;
+ 142   1              s_Lcd1602_Write(lcd, LCD_ENTRYMODESET | lcd->_displaymode, MODE_CMD);
+ 143   1      }
+ 144          void Lcd1602_noAutoscroll(Lcd1602 *lcd)
+ 145          {
+ 146   1              lcd->_displaymode &= ~LCD_ENTRYSHIFTINCREMENT;
+ 147   1              s_Lcd1602_Write(lcd, LCD_ENTRYMODESET | lcd->_displaymode, MODE_CMD);
+ 148   1      }
+ 149          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1419    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----      61
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+   EDATA SIZE       =   ----    ----
+   HDATA SIZE       =   ----    ----
+   XDATA CONST SIZE =   ----    ----
+   FAR CONST SIZE   =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
