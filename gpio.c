@@ -6,7 +6,8 @@
 #include "gpio.h"
 #include <reg52.h>
 
-#define PIN_TO_MASK(p) 	(0x01<<(p%8))
+//p%8 <==> p & 0x07
+#define PIN_TO_MASK(p) 	(0x01<<(p&0x07))	
 #define PIN_TO_PORT(p)	(p>>3)
 
 void digitalWrite(Pin pin, uint8_t val)
@@ -86,7 +87,8 @@ uint8_t digitalReadPort(Port port)
 		return P2;
 }
 
-uint8_t shiftIn(uint8_t dataPin, uint8_t clockPin, uint8_t bitOrder) {
+uint8_t shiftIn(uint8_t dataPin, uint8_t clockPin, uint8_t bitOrder) 
+{
 	uint8_t value = 0;
 	uint8_t i;
 

@@ -2,7 +2,8 @@
 ".\Objects\main.obj",
 ".\Objects\delay.obj",
 ".\Objects\gpio.obj",
-".\Objects\lcd1602.obj" 
+".\Objects\lcd1602.obj",
+".\Objects\i2csoft.obj" 
 TO ".\Objects\BasicC51" 
 
 PRINT(".\Listings\BasicC51.map") REMOVEUNUSED 

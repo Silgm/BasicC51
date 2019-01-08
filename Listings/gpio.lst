@@ -1,4 +1,4 @@
-C51 COMPILER V9.59.0.0   GPIO                                                              01/08/2019 10:27:48 PAGE 1   
+C51 COMPILER V9.59.0.0   GPIO                                                              01/08/2019 12:37:32 PAGE 1   
 
 
 C51 COMPILER V9.59.0.0, COMPILATION OF MODULE GPIO
@@ -8,126 +8,133 @@ COMPILER INVOKED BY: D:\Program Files (x86)\Keil_v5\C51\BIN\C51.EXE gpio.c LARGE
 
 line level    source
 
-   1          #include "gpio.h"
-   2          #include <reg52.h>
-   3          
-   4          #define PIN_TO_MASK(p)  (0x01<<(p%8))
-   5          #define PIN_TO_PORT(p)  (p>>3)
-   6          
-   7          void digitalWrite(Pin pin, uint8_t val)
-   8          {
-   9   1              uint8_t bitMask = PIN_TO_MASK(pin);
-  10   1              Port port = PIN_TO_PORT(pin);
-  11   1              
-  12   1              if (port == PORT_0)
-  13   1              {
-  14   2                      if(val)
-  15   2                              P0 |= bitMask;
-  16   2                      else
-  17   2                              P0 &= ~(bitMask);
-  18   2              }
-  19   1              else if (port == PORT_1)
-  20   1              {
-  21   2                      if(val)
-  22   2                              P1 |= bitMask;
-  23   2                      else
-  24   2                              P1 &= ~(bitMask);
-  25   2              }
-  26   1              else 
-  27   1              {
-  28   2                      if(val)
-  29   2                              P2 |= bitMask;
-  30   2                      else
-  31   2                              P2 &= ~(bitMask);
-  32   2              }
-  33   1      }
-  34          
-  35          
-  36          uint8_t digitalRead(Pin pin)
-  37          {
-  38   1              uint8_t bitMask = PIN_TO_MASK(pin);
-  39   1              Port port = PIN_TO_PORT(pin);
-  40   1              
-  41   1              if (port == PORT_0)
-  42   1              {
-  43   2                      if(P0 & bitMask)
-  44   2                              return HIGH;
-  45   2                      else
-  46   2                              return LOW;
-  47   2              }
-  48   1              else if (port == PORT_1)
-  49   1              {
-  50   2                      if(P1 & bitMask)
-  51   2                              return HIGH;
-  52   2                      else
-  53   2                              return LOW;
-  54   2              }
-C51 COMPILER V9.59.0.0   GPIO                                                              01/08/2019 10:27:48 PAGE 2   
+   1          /**
+   2           * gpio.c - "Arduino like" GPIO Fuction
+   3           * Copyright (c) 2018 Silgm. All right reserved.
+   4          */
+   5          
+   6          #include "gpio.h"
+   7          #include <reg52.h>
+   8          
+   9          //p%8 <==> p & 0x07
+  10          #define PIN_TO_MASK(p)  (0x01<<(p&0x07))        
+  11          #define PIN_TO_PORT(p)  (p>>3)
+  12          
+  13          void digitalWrite(Pin pin, uint8_t val)
+  14          {
+  15   1              uint8_t bitMask = PIN_TO_MASK(pin);
+  16   1              Port port = PIN_TO_PORT(pin);
+  17   1              
+  18   1              if (port == PORT_0)
+  19   1              {
+  20   2                      if(val)
+  21   2                              P0 |= bitMask;
+  22   2                      else
+  23   2                              P0 &= ~(bitMask);
+  24   2              }
+  25   1              else if (port == PORT_1)
+  26   1              {
+  27   2                      if(val)
+  28   2                              P1 |= bitMask;
+  29   2                      else
+  30   2                              P1 &= ~(bitMask);
+  31   2              }
+  32   1              else 
+  33   1              {
+  34   2                      if(val)
+  35   2                              P2 |= bitMask;
+  36   2                      else
+  37   2                              P2 &= ~(bitMask);
+  38   2              }
+  39   1      }
+  40          
+  41          
+  42          uint8_t digitalRead(Pin pin)
+  43          {
+  44   1              uint8_t bitMask = PIN_TO_MASK(pin);
+  45   1              Port port = PIN_TO_PORT(pin);
+  46   1              
+  47   1              if (port == PORT_0)
+  48   1              {
+  49   2                      if(P0 & bitMask)
+  50   2                              return HIGH;
+  51   2                      else
+  52   2                              return LOW;
+  53   2              }
+  54   1              else if (port == PORT_1)
+C51 COMPILER V9.59.0.0   GPIO                                                              01/08/2019 12:37:32 PAGE 2   
 
-  55   1              else 
-  56   1              {
-  57   2                      if(P2 & bitMask)
-  58   2                              return HIGH;
-  59   2                      else
-  60   2                              return LOW;
-  61   2              }
-  62   1      }
-  63          
-  64          void digitalWritePort(Port port, uint8_t val)
-  65          {
-  66   1              if (port == PORT_0)
-  67   1                      P0 = val;
-  68   1              else if (port == PORT_1)
-  69   1                      P1 = val;
-  70   1              else 
-  71   1                      P2 = val;
-  72   1      }
-  73          
-  74          uint8_t digitalReadPort(Port port)
-  75          {
-  76   1              if (port == PORT_0)
-  77   1                      return P0;
-  78   1              else if (port == PORT_1)
-  79   1                      return P1;
-  80   1              else 
-  81   1                      return P2;
-  82   1      }
-  83          
-  84          uint8_t shiftIn(uint8_t dataPin, uint8_t clockPin, uint8_t bitOrder) {
-  85   1              uint8_t value = 0;
-  86   1              uint8_t i;
-  87   1      
-  88   1              for (i = 0; i < 8; ++i) {
-  89   2                      digitalWrite(clockPin, HIGH);
-  90   2                      if (bitOrder == LSBFIRST)
-  91   2                              value |= digitalRead(dataPin) << i;
-  92   2                      else
-  93   2                              value |= digitalRead(dataPin) << (7 - i);
-  94   2                      digitalWrite(clockPin, LOW);
-  95   2              }
-  96   1              return value;
-  97   1      }
-  98          
-  99          void shiftOut(uint8_t dataPin, uint8_t clockPin, uint8_t bitOrder, uint8_t val)
- 100          {
- 101   1              uint8_t i;
- 102   1      
- 103   1              for (i = 0; i < 8; i++)  {
- 104   2                      if (bitOrder == LSBFIRST)
- 105   2                              digitalWrite(dataPin, !!(val & (1 << i)));
- 106   2                      else    
- 107   2                              digitalWrite(dataPin, !!(val & (1 << (7 - i))));
- 108   2                              
- 109   2                      digitalWrite(clockPin, HIGH);
- 110   2                      digitalWrite(clockPin, LOW);            
- 111   2              }
- 112   1      }
- 113          
+  55   1              {
+  56   2                      if(P1 & bitMask)
+  57   2                              return HIGH;
+  58   2                      else
+  59   2                              return LOW;
+  60   2              }
+  61   1              else 
+  62   1              {
+  63   2                      if(P2 & bitMask)
+  64   2                              return HIGH;
+  65   2                      else
+  66   2                              return LOW;
+  67   2              }
+  68   1      }
+  69          
+  70          void digitalWritePort(Port port, uint8_t val)
+  71          {
+  72   1              if (port == PORT_0)
+  73   1                      P0 = val;
+  74   1              else if (port == PORT_1)
+  75   1                      P1 = val;
+  76   1              else 
+  77   1                      P2 = val;
+  78   1      }
+  79          
+  80          uint8_t digitalReadPort(Port port)
+  81          {
+  82   1              if (port == PORT_0)
+  83   1                      return P0;
+  84   1              else if (port == PORT_1)
+  85   1                      return P1;
+  86   1              else 
+  87   1                      return P2;
+  88   1      }
+  89          
+  90          uint8_t shiftIn(uint8_t dataPin, uint8_t clockPin, uint8_t bitOrder) 
+  91          {
+  92   1              uint8_t value = 0;
+  93   1              uint8_t i;
+  94   1      
+  95   1              for (i = 0; i < 8; ++i) {
+  96   2                      digitalWrite(clockPin, HIGH);
+  97   2                      if (bitOrder == LSBFIRST)
+  98   2                              value |= digitalRead(dataPin) << i;
+  99   2                      else
+ 100   2                              value |= digitalRead(dataPin) << (7 - i);
+ 101   2                      digitalWrite(clockPin, LOW);
+ 102   2              }
+ 103   1              return value;
+ 104   1      }
+ 105          
+ 106          void shiftOut(uint8_t dataPin, uint8_t clockPin, uint8_t bitOrder, uint8_t val)
+ 107          {
+ 108   1              uint8_t i;
+ 109   1      
+ 110   1              for (i = 0; i < 8; i++)  {
+ 111   2                      if (bitOrder == LSBFIRST)
+ 112   2                              digitalWrite(dataPin, !!(val & (1 << i)));
+ 113   2                      else    
+ 114   2                              digitalWrite(dataPin, !!(val & (1 << (7 - i))));
+ 115   2                              
+ 116   2                      digitalWrite(clockPin, HIGH);
+C51 COMPILER V9.59.0.0   GPIO                                                              01/08/2019 12:37:32 PAGE 3   
+
+ 117   2                      digitalWrite(clockPin, LOW);            
+ 118   2              }
+ 119   1      }
+ 120          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-C51 COMPILER V9.59.0.0   GPIO                                                              01/08/2019 10:27:48 PAGE 3   
-
    CODE SIZE        =    400    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----       7

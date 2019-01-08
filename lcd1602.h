@@ -51,7 +51,6 @@
 
 /**
  * LCD1602 Module:
- * ½ÓÏß:
  * rs -> GPIO
  * enable -> GPIO
  * d4~47 -> GPIO
@@ -82,7 +81,7 @@ void Lcd1602_clear(Lcd1602 *lcd);
 void Lcd1602_home(Lcd1602 *lcd);
 
 /*After Use CreateChar Function, You must use setCursor to set mode to normal*/
-void Lcd1602_createChar(Lcd1602 *lcd, uint8_t location, uint8_t pixmap[]);
+void Lcd1602_createChar(Lcd1602 *lcd, uint8_t location, uint8_t pixmap[]); //location 0 ~ 7
 void Lcd1602_showChar(Lcd1602 *lcd, uint8_t location);
 
 void Lcd1602_noDisplay(Lcd1602 *lcd);

@@ -406,6 +406,11 @@
               <FileType>1</FileType>
               <FilePath>.\lcd1602.c</FilePath>
             </File>
+            <File>
+              <FileName>i2csoft.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\i2csoft.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -435,6 +440,11 @@
               <FileName>binary.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\binary.h</FilePath>
+            </File>
+            <File>
+              <FileName>i2csoft.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\i2csoft.h</FilePath>
             </File>
           </Files>
         </Group>
