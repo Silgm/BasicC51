@@ -1,0 +1,1 @@
+"i2csoft.c" LARGE OMF2 OPTIMIZE (8,SIZE) BROWSE DEBUG PRINT(.\Listings\i2csoft.lst) OBJECT(.\Objects\i2csoft.obj)

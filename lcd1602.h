@@ -65,7 +65,7 @@ typedef struct struct_lcd1602
 	uint8_t _displayfunction, _displaycontrol, _displaymode;
 }Lcd1602;
 
-void Lcd1602_Create(Lcd1602 *lcd, 
+void Lcd1602_create(Lcd1602 *lcd, 
 	Pin rs, 
 	Pin enable, 
 	Pin d4,

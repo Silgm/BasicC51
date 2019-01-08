@@ -39,7 +39,7 @@ static void s_Lcd1602_Write(const Lcd1602 *lcd, const uint8_t value, const uint8
 }
 
 
-void Lcd1602_Create(Lcd1602 *lcd, 
+void Lcd1602_create(Lcd1602 *lcd, 
 	Pin rs, 
 	Pin enable, 
 	Pin d4,

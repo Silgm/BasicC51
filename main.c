@@ -11,6 +11,31 @@ char buff[32] = "";
 
 void main()
 {
+	uint8_t dat = 0;
+	At24c02 rom;
+	Lcd1602 lcd;
+	
+	Lcd1602_create(&lcd, P2_5, P2_4, P2_3, P2_2, P2_1, P2_0);
+	At24c02_create(&rom, P1_2, P1_1, AT24C02_ADDRESS_A2A1A0_000);
+	
+	At24c02_init(&rom);
+	//At24c02_writeByte(&rom, 0x10, (uint8_t)99);
+	dat = At24c02_readByte(&rom, 0x10);
+	
+	
+	Lcd1602_init(&lcd);
+	Lcd1602_setCursor(&lcd, 0, 0);
+	
+	sprintf(buff, "Int:%d", (int)dat);
+	Lcd1602_print(&lcd, buff);
+	
+	
+	for (;;);
+}
+
+/*
+void main()
+{
 	uint8_t dat;
 	Lcd1602 lcd;
 	At24c02 rom;
@@ -32,7 +57,7 @@ void main()
 
 	for(;;);
 }
-
+*/
 /*
 char buff[32] = "";
 
