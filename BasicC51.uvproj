@@ -416,6 +416,11 @@
               <FileType>1</FileType>
               <FilePath>.\at24c02.c</FilePath>
             </File>
+            <File>
+              <FileName>ads1115.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\ads1115.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -455,6 +460,11 @@
               <FileName>at24c02.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\at24c02.h</FilePath>
+            </File>
+            <File>
+              <FileName>ads1115.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\ads1115.h</FilePath>
             </File>
           </Files>
         </Group>

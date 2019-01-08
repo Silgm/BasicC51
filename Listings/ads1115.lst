@@ -1,0 +1,58 @@
+C51 COMPILER V9.59.0.0   ADS1115                                                           01/08/2019 17:55:18 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE ADS1115
+OBJECT MODULE PLACED IN .\Objects\ads1115.obj
+COMPILER INVOKED BY: D:\Program Files (x86)\Keil_v5\C51\BIN\C51.EXE ads1115.c LARGE OMF2 OPTIMIZE(8,SIZE) BROWSE DEBUG P
+                    -RINT(.\Listings\ads1115.lst) OBJECT(.\Objects\ads1115.obj)
+
+line level    source
+
+   1          #include "ads1115.h"
+   2          
+   3          void Ads1115_create(Ads1115 *dev, Pin sda, Pin scl, uint8_t devAddr)
+   4          {
+   5   1              I2CDev_create(&(dev->i2cDev), sda, scl);
+   6   1              dev->addr = devAddr;
+   7   1      }
+   8          
+   9          void Ads1115_init(Ads1115 *dev)
+  10          {
+  11   1              I2CDev_init(&(dev->i2cDev));
+  12   1      }
+  13          
+  14          static uint16_t s_Ads1115_read(Ads1115 *dev, uint8_t regAddr)
+  15          {
+  16   1              uint16_t dat = 0;
+  17   1              
+  18   1              I2CDev_start(&(dev->i2cDev));
+  19   1              I2CDev_writeAddress(&(dev->i2cDev), dev->addr, MODE_WRITE);
+  20   1              I2CDev_writeData(&(dev->i2cDev), regAddr);
+  21   1              I2CDev_stop(&(dev->i2cDev));
+  22   1              
+  23   1              I2CDev_start(&(dev->i2cDev));
+  24   1              I2CDev_writeAddress(&(dev->i2cDev), dev->addr, MODE_READ);
+  25   1              dat = ((uint16_t)I2CDev_readData(&(dev->i2cDev), true)) << 8;
+  26   1              dat |= (uint16_t)I2CDev_readData(&(dev->i2cDev), true);
+  27   1              I2CDev_stop(&(dev->i2cDev));
+  28   1              
+  29   1              return dat;
+  30   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    209    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----      12
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+   EDATA SIZE       =   ----    ----
+   HDATA SIZE       =   ----    ----
+   XDATA CONST SIZE =   ----    ----
+   FAR CONST SIZE   =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

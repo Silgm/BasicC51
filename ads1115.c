@@ -2,11 +2,11 @@
 
 void Ads1115_create(Ads1115 *dev, Pin sda, Pin scl, uint8_t devAddr)
 {
-	I2CDev_create(dev, sda, scl);
+	I2CDev_create(&(dev->i2cDev), sda, scl);
 	dev->addr = devAddr;
 }
 
-void Ads1115_init(Ads115 *dev)
+void Ads1115_init(Ads1115 *dev)
 {
 	I2CDev_init(&(dev->i2cDev));
 }

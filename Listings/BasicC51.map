@@ -1,10 +1,10 @@
-LX51 LINKER/LOCATER V4.66.93.0                                                          01/08/2019  17:03:49  PAGE 1
+LX51 LINKER/LOCATER V4.66.93.0                                                          01/08/2019  17:55:18  PAGE 1
 
 
 LX51 LINKER/LOCATER V4.66.93.0, INVOKED BY:
 D:\PROGRAM FILES (X86)\KEIL_V5\C51\BIN\LX51.EXE .\Objects\STARTUP.obj, .\Objects\main.obj, .\Objects\delay.obj, .\Object
->> s\gpio.obj, .\Objects\lcd1602.obj, .\Objects\i2csoft.obj, .\Objects\at24c02.obj TO .\Objects\BasicC51 PRINT (.\Listin
->> gs\BasicC51.map) REMOVEUNUSED
+>> s\gpio.obj, .\Objects\lcd1602.obj, .\Objects\i2csoft.obj, .\Objects\at24c02.obj, .\Objects\ads1115.obj TO .\Objects\B
+>> asicC51 PRINT (.\Listings\BasicC51.map) REMOVEUNUSED
 
 
 CPU MODE:     8051 MODE
@@ -25,6 +25,8 @@ INPUT MODULES INCLUDED:
   .\Objects\i2csoft.obj (I2CSOFT)
          COMMENT TYPE 0: C51 V9.59.0.0
   .\Objects\at24c02.obj (AT24C02)
+         COMMENT TYPE 0: C51 V9.59.0.0
+  .\Objects\ads1115.obj (ADS1115)
          COMMENT TYPE 0: C51 V9.59.0.0
   D:\PROGRAM FILES (X86)\KEIL_V5\C51\LIB\C51L.LIB (?C_INIT)
          COMMENT TYPE 1: A51 / ASM51 Assembler
@@ -65,11 +67,11 @@ ACTIVE MEMORY CLASSES OF MODULE:  .\Objects\BasicC51 (?C_STARTUP)
 BASE        START       END         USED      MEMORY CLASS
 ==========================================================
 C:000000H   C:000000H   C:00FFFFH   000DB9H   CODE
+LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  17:55:18  PAGE 2
+
+
 I:000000H   I:000000H   I:0000FFH   000001H   IDATA
 X:000000H   X:000000H   X:00FFFFH   000058H   XDATA
-LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  17:03:49  PAGE 2
-
-
 C:000000H   C:000000H   C:00FFFFH   000007H   CONST
 I:000000H   I:000000H   I:00007FH   00000DH   DATA
 I:000020H.0 I:000020H.0 I:00002FH.7 000001H.1 BIT
@@ -133,11 +135,11 @@ START     STOP      LENGTH    ALIGN  RELOC    MEMORY CLASS   SEGMENT NAME
 * * * * * * * * *   R E M O V E D     S E G M E N T S   * * * * * * * *
    *DEL*:           00001BH   BYTE   UNIT     CODE           ?PR?_DELAY_MS?DELAY
    *DEL*:           000017H   BYTE   UNIT     CODE           ?PR?_DIGITALWRITEPORT?GPIO
+LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  17:55:18  PAGE 3
+
+
    *DEL*:           000014H   BYTE   UNIT     CODE           ?PR?_DIGITALREADPORT?GPIO
    *DEL*:           000011H   BYTE   UNIT     CODE           ?PR?_LCD1602_HOME?LCD1602
-LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  17:03:49  PAGE 3
-
-
    *DEL*:           00004EH   BYTE   UNIT     CODE           ?PR?_LCD1602_CREATECHAR?LCD1602
    *DEL*:           000008H   BYTE   UNIT     XDATA          ?XD?_LCD1602_CREATECHAR?LCD1602
    *DEL*:           000009H   BYTE   UNIT     CODE           ?PR?_LCD1602_SHOWCHAR?LCD1602
@@ -163,6 +165,11 @@ START     STOP      LENGTH    ALIGN  RELOC    MEMORY CLASS   SEGMENT NAME
    *DEL*:           000003H   BYTE   UNIT     XDATA          ?XD?_LCD1602_NOAUTOSCROLL?LCD1602
    *DEL*:           00004EH   BYTE   UNIT     CODE           ?PR?_AT24C02_WRITEBYTE?AT24C02
    *DEL*:           000005H   BYTE   UNIT     XDATA          ?XD?_AT24C02_WRITEBYTE?AT24C02
+   *DEL*:           000029H   BYTE   UNIT     CODE           ?PR?_ADS1115_CREATE?ADS1115
+   *DEL*:           000006H   BYTE   UNIT     XDATA          ?XD?_ADS1115_CREATE?ADS1115
+   *DEL*:           000003H   BYTE   UNIT     CODE           ?PR?_ADS1115_INIT?ADS1115
+   *DEL*:           0000A5H   BYTE   UNIT     CODE           ?PR?_S_ADS1115_READ?ADS1115
+   *DEL*:           000006H   BYTE   UNIT     XDATA          ?XD?_S_ADS1115_READ?ADS1115
 
 
 
@@ -196,6 +203,9 @@ _I2CDEV_CREATE/I2CSOFT                   ----- -----  ----- -----  0016H 001AH
 _AT24C02_INIT/AT24C02                    ----- -----  ----- -----  ----- -----
   +--> _I2CDEV_INIT/I2CSOFT
 
+LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  17:55:18  PAGE 4
+
+
 _I2CDEV_INIT/I2CSOFT                     ----- -----  ----- -----  0010H 0012H
   +--> _DIGITALWRITE/GPIO
 
@@ -203,9 +213,6 @@ _DIGITALWRITE/GPIO                       ----- -----  ----- -----  ----- -----
 
 _AT24C02_READBYTE/AT24C02                ----- -----  ----- -----  0010H 0014H
   +--> _I2CDEV_START/I2CSOFT
-LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  17:03:49  PAGE 4
-
-
   +--> _I2CDEV_WRITEADDRESS/I2CSOFT
   +--> _I2CDEV_WRITEDATA/I2CSOFT
   +--> _I2CDEV_STOP/I2CSOFT
@@ -264,6 +271,9 @@ _S_LCD1602_WRITE/LCD1602                 ----- -----  ----- -----  0016H 001AH
   +--> _S_LCD1602_PLUSEENABLE/LCD1602
 
 _S_LCD1602_PLUSEENABLE/LCD1602           ----- -----  ----- -----  001BH 001DH
+LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  17:55:18  PAGE 5
+
+
   +--> _DIGITALWRITE/GPIO
   +--> _DELAY_US/DELAY
 
@@ -271,9 +281,6 @@ _DELAY_US/DELAY                          ----- -----  ----- -----  ----- -----
 
 _LCD1602_DISPLAY/LCD1602                 ----- -----  ----- -----  0013H 0015H
   +--> _S_LCD1602_WRITE/LCD1602
-LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  17:03:49  PAGE 5
-
-
 
 _LCD1602_CLEAR/LCD1602                   ----- -----  ----- -----  ----- -----
   +--> _S_LCD1602_WRITE/LCD1602
@@ -299,6 +306,7 @@ PUBLIC SYMBOLS OF MODULE:  .\Objects\BasicC51 (?C_STARTUP)
 
       VALUE       CLASS    TYPE      PUBLIC SYMBOL NAME
       =================================================
+*DEL*:00000000H   XDATA    BYTE      ?_Ads1115_create?BYTE
       02000010H   XDATA    BYTE      ?_At24c02_create?BYTE
 *DEL*:00000000H   XDATA    BYTE      ?_At24c02_writeByte?BYTE
       02000016H   XDATA    BYTE      ?_I2CDev_create?BYTE
@@ -329,6 +337,11 @@ PUBLIC SYMBOLS OF MODULE:  .\Objects\BasicC51 (?C_STARTUP)
       00000000H   NUMBER   ---       ?C?XDATASEG
       01000796H   CODE     ---       ?C_START
       01000000H   CODE     ---       ?C_STARTUP
+*DEL*:00000000H   CODE     ---       _Ads1115_create
+*DEL*:00000000H   CODE     ---       _Ads1115_init
+LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  17:55:18  PAGE 6
+
+
       01000CA3H   CODE     ---       _At24c02_create
       01000DB6H   CODE     ---       _At24c02_init
       010007DBH   CODE     ---       _At24c02_readByte
@@ -339,9 +352,6 @@ PUBLIC SYMBOLS OF MODULE:  .\Objects\BasicC51 (?C_STARTUP)
 *DEL*:00000000H   CODE     ---       _digitalReadPort
       01000B5EH   CODE     ---       _digitalWrite
 *DEL*:00000000H   CODE     ---       _digitalWritePort
-LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  17:03:49  PAGE 6
-
-
       01000D66H   CODE     ---       _I2CDev_create
       01000CF3H   CODE     ---       _I2CDev_init
       01000A4EH   CODE     ---       _I2CDev_readByte
@@ -397,6 +407,9 @@ PUBLIC SYMBOLS OF MODULE:  .\Objects\BasicC51 (?C_STARTUP)
 *SFR* 000000C8H.3 DATA     BIT       EXEN2
 *SFR* 000000C8H.6 DATA     BIT       EXF2
 *SFR* 000000D0H.5 DATA     BIT       F0
+LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  17:55:18  PAGE 7
+
+
 *SFR* 000000A8H   DATA     BYTE      IE
 *SFR* 00000088H.1 DATA     BIT       IE0
 *SFR* 00000088H.3 DATA     BIT       IE1
@@ -407,9 +420,6 @@ PUBLIC SYMBOLS OF MODULE:  .\Objects\BasicC51 (?C_STARTUP)
 *SFR* 00000088H.2 DATA     BIT       IT1
       01000615H   CODE     ---       main
 *SFR* 000000D0H.2 DATA     BIT       OV
-LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  17:03:49  PAGE 7
-
-
 *SFR* 000000D0H.0 DATA     BIT       P
 *SFR* 00000080H   DATA     BYTE      P0
 *SFR* 00000090H   DATA     BYTE      P1
@@ -465,6 +475,9 @@ PUBLIC SYMBOLS OF MODULE:  .\Objects\BasicC51 (?C_STARTUP)
 *SFR* 000000B0H.6 DATA     BIT       WR
 
 
+LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  17:55:18  PAGE 8
+
+
 
 SYMBOL TABLE OF MODULE:  .\Objects\BasicC51 (?C_STARTUP)
 
@@ -475,9 +488,6 @@ SYMBOL TABLE OF MODULE:  .\Objects\BasicC51 (?C_STARTUP)
       000000E0H   SYMBOL    DATA     ---       ACC
       000000F0H   SYMBOL    DATA     ---       B
       00000083H   SYMBOL    DATA     ---       DPH
-LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  17:03:49  PAGE 8
-
-
       00000082H   SYMBOL    DATA     ---       DPL
       00000000H   SYMBOL    NUMBER   ---       IBPSTACK
       00000100H   SYMBOL    NUMBER   ---       IBPSTACKTOP
@@ -533,6 +543,9 @@ SYMBOL TABLE OF MODULE:  .\Objects\BasicC51 (?C_STARTUP)
       000000D0H.2 SFRSYM    DATA     BIT       OV
       000000CAH   SFRSYM    DATA     BYTE      RCAP2L
       000000C8H.1 SFRSYM    DATA     BIT       C_T2
+LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  17:55:18  PAGE 9
+
+
       000000B0H.6 SFRSYM    DATA     BIT       WR
       000000C8H.5 SFRSYM    DATA     BIT       RCLK
       000000C8H.4 SFRSYM    DATA     BIT       TCLK
@@ -543,9 +556,6 @@ SYMBOL TABLE OF MODULE:  .\Objects\BasicC51 (?C_STARTUP)
       00000088H   SFRSYM    DATA     BYTE      TCON
       00000088H.1 SFRSYM    DATA     BIT       IE0
       00000088H.3 SFRSYM    DATA     BIT       IE1
-LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  17:03:49  PAGE 9
-
-
       000000F0H   SFRSYM    DATA     BYTE      B
       000000C8H.0 SFRSYM    DATA     BIT       CP_RL2
       000000E0H   SFRSYM    DATA     BYTE      ACC
@@ -601,6 +611,9 @@ SYMBOL TABLE OF MODULE:  .\Objects\BasicC51 (?C_STARTUP)
       01000615H   LINE      CODE     ---       #13
       01000615H   LINE      CODE     ---       #14
       0100061AH   LINE      CODE     ---       #18
+LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  17:55:18  PAGE 10
+
+
       01000637H   LINE      CODE     ---       #19
       0100064CH   LINE      CODE     ---       #21
       01000655H   LINE      CODE     ---       #23
@@ -610,9 +623,6 @@ SYMBOL TABLE OF MODULE:  .\Objects\BasicC51 (?C_STARTUP)
       0100069FH   LINE      CODE     ---       #30
       010006B2H   LINE      CODE     ---       #33
       ---         BLOCKEND  ---      ---       LVL=0
-
-LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  17:03:49  PAGE 10
-
 
       ---         MODULE    ---      ---       DELAY
       01000D9BH   PUBLIC    CODE     ---       _delay_us
@@ -669,6 +679,9 @@ SYMBOL TABLE OF MODULE:  .\Objects\BasicC51 (?C_STARTUP)
       00000088H   SFRSYM    DATA     BYTE      TCON
       00000088H.1 SFRSYM    DATA     BIT       IE0
       00000088H.3 SFRSYM    DATA     BIT       IE1
+LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  17:55:18  PAGE 11
+
+
       000000F0H   SFRSYM    DATA     BYTE      B
       000000C8H.0 SFRSYM    DATA     BIT       CP_RL2
       000000E0H   SFRSYM    DATA     BYTE      ACC
@@ -679,9 +692,6 @@ SYMBOL TABLE OF MODULE:  .\Objects\BasicC51 (?C_STARTUP)
       00000088H.7 SFRSYM    DATA     BIT       TF1
       000000C8H.7 SFRSYM    DATA     BIT       TF2
       00000098H.2 SFRSYM    DATA     BIT       RB8
-LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  17:03:49  PAGE 11
-
-
       0000008CH   SFRSYM    DATA     BYTE      TH0
       000000A8H.0 SFRSYM    DATA     BIT       EX0
       00000088H.0 SFRSYM    DATA     BIT       IT0
@@ -737,6 +747,9 @@ SYMBOL TABLE OF MODULE:  .\Objects\BasicC51 (?C_STARTUP)
       01000B82H   LINE      CODE     ---       #25
       01000B87H   LINE      CODE     ---       #26
       01000B87H   LINE      CODE     ---       #27
+LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  17:55:18  PAGE 12
+
+
       01000B8AH   LINE      CODE     ---       #28
       01000B8EH   LINE      CODE     ---       #30
       01000B92H   LINE      CODE     ---       #31
@@ -747,9 +760,6 @@ SYMBOL TABLE OF MODULE:  .\Objects\BasicC51 (?C_STARTUP)
       01000B9EH   LINE      CODE     ---       #38
       01000B9EH   LINE      CODE     ---       #39
       ---         BLOCKEND  ---      ---       LVL=0
-LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  17:03:49  PAGE 12
-
-
 
       01000B9FH   BLOCK     CODE     ---       LVL=0
       00000007H   SYMBOL    DATA     BYTE      pin
@@ -805,6 +815,9 @@ SYMBOL TABLE OF MODULE:  .\Objects\BasicC51 (?C_STARTUP)
       01000B18H   LINE      CODE     ---       #103
       01000B1AH   LINE      CODE     ---       #104
       ---         BLOCKEND  ---      ---       LVL=0
+LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  17:55:18  PAGE 13
+
+
 
       010008E1H   BLOCK     CODE     ---       LVL=0
       00000001H   SYMBOL    DATA     BYTE      dataPin
@@ -815,9 +828,6 @@ SYMBOL TABLE OF MODULE:  .\Objects\BasicC51 (?C_STARTUP)
       00000003H   SYMBOL    DATA     BYTE      i
       ---         BLOCKEND  ---      ---       LVL=1
       010008E1H   LINE      CODE     ---       #106
-LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  17:03:49  PAGE 13
-
-
       010008EAH   LINE      CODE     ---       #107
       010008EAH   LINE      CODE     ---       #110
       010008F6H   LINE      CODE     ---       #111
@@ -873,6 +883,9 @@ SYMBOL TABLE OF MODULE:  .\Objects\BasicC51 (?C_STARTUP)
       010005F1H   LINE      CODE     ---       #36
       0100060CH   LINE      CODE     ---       #38
       ---         BLOCKEND  ---      ---       LVL=0
+LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  17:55:18  PAGE 14
+
+
 
       01000C15H   BLOCK     CODE     ---       LVL=0
       00000001H   SYMBOL    DATA     ---       lcd
@@ -883,9 +896,6 @@ SYMBOL TABLE OF MODULE:  .\Objects\BasicC51 (?C_STARTUP)
       02000017H   SYMBOL    XDATA    BYTE      d6
       02000018H   SYMBOL    XDATA    BYTE      d7
       01000C15H   LINE      CODE     ---       #42
-LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  17:03:49  PAGE 14
-
-
       01000C15H   LINE      CODE     ---       #49
       01000C15H   LINE      CODE     ---       #50
       01000C19H   LINE      CODE     ---       #51
@@ -941,6 +951,9 @@ SYMBOL TABLE OF MODULE:  .\Objects\BasicC51 (?C_STARTUP)
       00000005H   SYMBOL    DATA     BYTE      location
       00000001H   SYMBOL    DATA     ---       lcd
       00000005H   SYMBOL    DATA     BYTE      location
+LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  17:55:18  PAGE 15
+
+
 
       01000BDDH   BLOCK     CODE     ---       LVL=0
       02000013H   SYMBOL    XDATA    ---       lcd
@@ -951,9 +964,6 @@ SYMBOL TABLE OF MODULE:  .\Objects\BasicC51 (?C_STARTUP)
       ---         BLOCKEND  ---      ---       LVL=0
       00000001H   SYMBOL    DATA     ---       lcd
       00000001H   SYMBOL    DATA     ---       lcd
-LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  17:03:49  PAGE 15
-
-
 
       ---         MODULE    ---      ---       I2CSOFT
       01000DB3H   PUBLIC    CODE     ---       _I2CDev_readData
@@ -1009,6 +1019,9 @@ SYMBOL TABLE OF MODULE:  .\Objects\BasicC51 (?C_STARTUP)
 
       010006B4H   BLOCK     CODE     ---       LVL=0
       02000015H   SYMBOL    XDATA    ---       dev
+LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  17:55:18  PAGE 16
+
+
       010006B4H   LINE      CODE     ---       #35
       010006BAH   LINE      CODE     ---       #36
       010006BAH   LINE      CODE     ---       #38
@@ -1019,9 +1032,6 @@ SYMBOL TABLE OF MODULE:  .\Objects\BasicC51 (?C_STARTUP)
       010006ECH   LINE      CODE     ---       #44
       010006FFH   LINE      CODE     ---       #45
       010006FFH   LINE      CODE     ---       #48
-LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  17:03:49  PAGE 16
-
-
       0100070BH   LINE      CODE     ---       #49
       0100070BH   LINE      CODE     ---       #50
       0100070BH   LINE      CODE     ---       #52
@@ -1077,6 +1087,9 @@ SYMBOL TABLE OF MODULE:  .\Objects\BasicC51 (?C_STARTUP)
       ---         BLOCKEND  ---      ---       LVL=0
 
       01000DB0H   BLOCK     CODE     ---       LVL=0
+LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  17:55:18  PAGE 17
+
+
       00000001H   SYMBOL    DATA     ---       dev
       00000005H   SYMBOL    DATA     BYTE      dat
       01000DB0H   LINE      CODE     ---       #110
@@ -1087,9 +1100,6 @@ SYMBOL TABLE OF MODULE:  .\Objects\BasicC51 (?C_STARTUP)
       01000D8CH   BLOCK     CODE     ---       LVL=0
       00000001H   SYMBOL    DATA     ---       dev
       00000005H   SYMBOL    DATA     BYTE      addr
-LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  17:03:49  PAGE 17
-
-
       02000019H   SYMBOL    XDATA    BYTE      mode_rw
       01000D8CH   LINE      CODE     ---       #115
       01000D8CH   LINE      CODE     ---       #116
@@ -1145,6 +1155,9 @@ SYMBOL TABLE OF MODULE:  .\Objects\BasicC51 (?C_STARTUP)
       01000DB6H   LINE      CODE     ---       #13
       01000DB6H   LINE      CODE     ---       #14
       01000DB6H   LINE      CODE     ---       #15
+LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  17:55:18  PAGE 18
+
+
       ---         BLOCKEND  ---      ---       LVL=0
 
       010007DBH   BLOCK     CODE     ---       LVL=0
@@ -1155,9 +1168,6 @@ SYMBOL TABLE OF MODULE:  .\Objects\BasicC51 (?C_STARTUP)
       ---         BLOCKEND  ---      ---       LVL=1
       010007DBH   LINE      CODE     ---       #27
       010007E6H   LINE      CODE     ---       #28
-LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  17:03:49  PAGE 18
-
-
       010007E6H   LINE      CODE     ---       #30
       010007E9H   LINE      CODE     ---       #31
       01000804H   LINE      CODE     ---       #32
@@ -1169,6 +1179,10 @@ SYMBOL TABLE OF MODULE:  .\Objects\BasicC51 (?C_STARTUP)
       01000859H   LINE      CODE     ---       #39
       0100085EH   LINE      CODE     ---       #40
       ---         BLOCKEND  ---      ---       LVL=0
+
+      ---         MODULE    ---      ---       ADS1115
+      00000005H   SYMBOL    DATA     BYTE      sda
+      00000001H   SYMBOL    DATA     ---       dev
 
       ---         MODULE    ---      ---       ?C_INIT
       01000796H   PUBLIC    CODE     ---       ?C_START
@@ -1209,6 +1223,9 @@ SYMBOL TABLE OF MODULE:  .\Objects\BasicC51 (?C_STARTUP)
       ---         MODULE    ---      ---       PRINTF
       02000010H   PUBLIC    XDATA    ---       ?_PRINTF517?BYTE
       02000010H   PUBLIC    XDATA    ---       ?_PRINTF?BYTE
+LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  17:55:18  PAGE 19
+
+
       02000010H   PUBLIC    XDATA    ---       ?_SPRINTF517?BYTE
       02000010H   PUBLIC    XDATA    ---       ?_SPRINTF?BYTE
       0100006EH   PUBLIC    CODE     ---       _PRINTF
@@ -1223,9 +1240,6 @@ SYMBOL TABLE OF MODULE:  .\Objects\BasicC51 (?C_STARTUP)
       010004E9H   PUBLIC    CODE     ---       ?C?CCASE
 
       ---         MODULE    ---      ---       PUTCHAR
-LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  17:03:49  PAGE 19
-
-
       01000D1AH   PUBLIC    CODE     ---       _PUTCHAR
 
 Program Size: data=15.1 xdata=88 const=7 code=3513
