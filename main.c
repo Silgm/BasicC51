@@ -5,7 +5,35 @@
 #include <stdio.h>
 
 #include "binary.h"
+#include "at24c02.h"
 
+char buff[32] = "";
+
+void main()
+{
+	uint8_t dat;
+	Lcd1602 lcd;
+	At24c02 rom;
+	
+	Lcd1602_Create(&lcd, P2_5, P2_4, P2_3, P2_2, P2_1, P2_0);
+	Lcd1602_init(&lcd);
+	
+	At24c02_create(&rom, P1_2, P1_1, AT24C02_ADDRESS_A2A1A0_000);
+	At24c02_init(&rom);
+	
+	//At24c02_writeByte(&rom, 10, (uint8_t)100);
+	//delay_ms(1);
+	dat = At24c02_readByte(&rom, 10);
+	
+	sprintf(buff, "%d", (int)dat);
+	
+	Lcd1602_print(&lcd, buff);
+	
+
+	for(;;);
+}
+
+/*
 char buff[32] = "";
 
 const char heart[8] = {
@@ -34,7 +62,7 @@ void main()
 	Lcd1602_showChar(&lcd, 0);
 	Lcd1602_print(&lcd, " C51");
 	*/
-	
+	/*
 	for (;;)
 	{
 		if (digitalRead(P1_0) == HIGH)
@@ -49,4 +77,4 @@ void main()
 		}
 	}
 }
-
+*/

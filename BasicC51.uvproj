@@ -411,6 +411,11 @@
               <FileType>1</FileType>
               <FilePath>.\i2csoft.c</FilePath>
             </File>
+            <File>
+              <FileName>at24c02.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\at24c02.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -445,6 +450,11 @@
               <FileName>i2csoft.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\i2csoft.h</FilePath>
+            </File>
+            <File>
+              <FileName>at24c02.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\at24c02.h</FilePath>
             </File>
           </Files>
         </Group>

@@ -25,7 +25,8 @@ bool I2CDev_start(I2CDev *dev);
 bool I2CDev_stop(I2CDev *dev);
 bool I2CDev_writeByte(I2CDev *dev, uint8_t bt);
 bool I2CDev_writeData(I2CDev *dev, uint8_t dat);
-
+bool I2CDev_writeAddress(I2CDev *dev, uint8_t addr, uint8_t mode_rw);
+	
 uint8_t I2CDev_readData(I2CDev *dev, bool ack);
 uint8_t I2CDev_readByte(I2CDev *dev, bool ack);
 

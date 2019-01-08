@@ -29,7 +29,7 @@ void I2CDev_create(I2CDev *dev, Pin sdaPin, Pin sclPin)
 void I2CDev_init(I2CDev *dev)
 {
 	digitalWrite(dev->sda, HIGH);
-	digitalWrite(dev->sda, LOW);
+	digitalWrite(dev->scl, HIGH);
 }
 
 bool I2CDev_start(I2CDev *dev)
@@ -114,7 +114,7 @@ bool I2CDev_writeData(I2CDev *dev, uint8_t dat)
 
 bool I2CDev_writeAddress(I2CDev *dev, uint8_t addr, uint8_t mode_rw)
 {
-	return I2CDev_writeByte(dev, (addr<<1) & mode_rw);
+	return I2CDev_writeByte(dev, (addr<<1) | mode_rw);
 }
 
 uint8_t I2CDev_readByte(I2CDev *dev, bool ack)
@@ -122,9 +122,12 @@ uint8_t I2CDev_readByte(I2CDev *dev, bool ack)
 	uint8_t dat = shiftIn(dev->sda, dev->scl, MSBFIRST);
 	
 	//Send Ack
-	digitalWrite(dev->sda, ack);
-	digitalWrite(dev->scl, HIGH);
-	digitalWrite(dev->scl, LOW);		
+	if (ack == true)
+	{
+		digitalWrite(dev->sda, ack);
+		digitalWrite(dev->scl, HIGH);
+		digitalWrite(dev->scl, LOW);	
+	}
 	
 	return dat;
 }
