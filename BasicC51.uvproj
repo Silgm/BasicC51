@@ -316,7 +316,7 @@
             <Fuzzy>3</Fuzzy>
             <Optimize>8</Optimize>
             <WarningLevel>2</WarningLevel>
-            <SizeSpeed>1</SizeSpeed>
+            <SizeSpeed>0</SizeSpeed>
             <ObjectExtend>1</ObjectExtend>
             <ACallAJmp>0</ACallAJmp>
             <InterruptVectorAddress>0</InterruptVectorAddress>
@@ -430,6 +430,11 @@
               <FileName>lcd1602.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\lcd1602.h</FilePath>
+            </File>
+            <File>
+              <FileName>binary.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\binary.h</FilePath>
             </File>
           </Files>
         </Group>

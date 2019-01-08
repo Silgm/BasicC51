@@ -87,6 +87,22 @@ void Lcd1602_home(Lcd1602 *lcd)
 	delay_us(2000);  // this command takes a long time!
 }
 
+void Lcd1602_createChar(Lcd1602 *lcd, uint8_t location, uint8_t pixmap[])
+{
+	uint8_t i = 0;
+	location &= 0x7; // we only have 8 locations 0-7
+	s_Lcd1602_Write(lcd, LCD_SETCGRAMADDR | (location << 3), MODE_CMD);
+	for (; i<8; i++) 
+	{
+		s_Lcd1602_Write(lcd, pixmap[i], MODE_DATA);
+	}
+}
+
+void Lcd1602_showChar(Lcd1602 *lcd, uint8_t location)
+{
+	s_Lcd1602_Write(lcd, location, MODE_DATA);
+}
+
 void Lcd1602_noDisplay(Lcd1602 *lcd)
 {
 	lcd->_displaycontrol &= ~LCD_DISPLAYON;
