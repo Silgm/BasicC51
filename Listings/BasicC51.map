@@ -1,4 +1,4 @@
-LX51 LINKER/LOCATER V4.66.93.0                                                          01/08/2019  10:34:15  PAGE 1
+LX51 LINKER/LOCATER V4.66.93.0                                                          01/08/2019  10:38:17  PAGE 1
 
 
 LX51 LINKER/LOCATER V4.66.93.0, INVOKED BY:
@@ -67,7 +67,7 @@ START     STOP      LENGTH    ALIGN  RELOC    MEMORY CLASS   SEGMENT NAME
    *DEL*:           00001BH   BYTE   UNIT     CODE           ?PR?_DELAY_MS?DELAY
    *DEL*:           00000CH   BYTE   UNIT     CODE           ?PR?_DELAY_US?DELAY
    *DEL*:           000041H   BYTE   UNIT     CODE           ?PR?_DIGITALWRITE?GPIO
-LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  10:34:15  PAGE 2
+LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  10:38:17  PAGE 2
 
 
    *DEL*:           00003EH   BYTE   UNIT     CODE           ?PR?_DIGITALREAD?GPIO
@@ -135,7 +135,7 @@ MAIN/MAIN                                ----- -----  ----- -----
 PUBLIC SYMBOLS OF MODULE:  .\Objects\BasicC51 (?C_STARTUP)
 
 
-LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  10:34:15  PAGE 3
+LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  10:38:17  PAGE 3
 
 
       VALUE       CLASS    TYPE      PUBLIC SYMBOL NAME
@@ -203,7 +203,7 @@ PUBLIC SYMBOLS OF MODULE:  .\Objects\BasicC51 (?C_STARTUP)
 *SFR* 000000C8H.6 DATA     BIT       EXF2
 *SFR* 000000D0H.5 DATA     BIT       F0
 *SFR* 000000A8H   DATA     BYTE      IE
-LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  10:34:15  PAGE 4
+LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  10:38:17  PAGE 4
 
 
 *SFR* 00000088H.1 DATA     BIT       IE0
@@ -271,7 +271,7 @@ PUBLIC SYMBOLS OF MODULE:  .\Objects\BasicC51 (?C_STARTUP)
 
 
 
-LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  10:34:15  PAGE 5
+LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  10:38:17  PAGE 5
 
 
 SYMBOL TABLE OF MODULE:  .\Objects\BasicC51 (?C_STARTUP)
@@ -339,7 +339,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\BasicC51 (?C_STARTUP)
       000000C8H.1 SFRSYM    DATA     BIT       C_T2
       000000B0H.6 SFRSYM    DATA     BIT       WR
       000000C8H.5 SFRSYM    DATA     BIT       RCLK
-LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  10:34:15  PAGE 6
+LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  10:38:17  PAGE 6
 
 
       000000C8H.4 SFRSYM    DATA     BIT       TCLK
@@ -407,7 +407,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\BasicC51 (?C_STARTUP)
       00000006H   SYMBOL    DATA     WORD      ms
       00000005H   SYMBOL    DATA     BYTE      i
       00000006H   SYMBOL    DATA     WORD      us
-LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  10:34:15  PAGE 7
+LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  10:38:17  PAGE 7
 
 
 
@@ -475,7 +475,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\BasicC51 (?C_STARTUP)
       000000CCH   SFRSYM    DATA     BYTE      TL2
       000000B8H.1 SFRSYM    DATA     BIT       PT0
       000000B8H.3 SFRSYM    DATA     BIT       PT1
-LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  10:34:15  PAGE 8
+LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  10:38:17  PAGE 8
 
 
       000000D0H.3 SFRSYM    DATA     BIT       RS0
@@ -543,7 +543,7 @@ SYMBOL TABLE OF MODULE:  .\Objects\BasicC51 (?C_STARTUP)
       ---         MODULE    ---      ---       ?C?PSTXDATA
       0100009CH   PUBLIC    CODE     ---       ?C?PSTXDATA
 
-LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  10:34:15  PAGE 9
+LX51 LINKER/LOCATER V4.66.93.0                                                        01/08/2019  10:38:17  PAGE 9
 
 
 Program Size: data=9.0 xdata=0 const=0 code=179

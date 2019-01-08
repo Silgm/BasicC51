@@ -1,3 +1,8 @@
+/**
+ * intdef.h - basic definition of integral type
+ * Copyright (c) 2018 Silgm. All right reserved.
+*/
+
 #ifndef _INTDEF_H_
 #define _INTDEF_H_
 

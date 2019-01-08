@@ -1,3 +1,8 @@
+/**
+ * gpio.h - "Arduino like" GPIO Fuction
+ * Copyright (c) 2018 Silgm. All right reserved.
+*/
+
 #ifndef _GPIO_H_
 #define _GPIO_H_
 

@@ -1,3 +1,8 @@
+/**
+ * lcd1602.c - LCD1602 Module 
+ * Copyright (c) 2018 Silgm. All right reserved.
+*/
+
 #include "lcd1602.h"
 
 #define MODE_DATA	1

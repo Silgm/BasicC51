@@ -1,3 +1,7 @@
+/**
+ * delay.h - Basic and inaccuracy delay function
+ * Copyright (c) 2018 Silgm. All right reserved.
+*/
 #ifndef _DELAY_H_
 #define _DELAY_H_
 

@@ -1,3 +1,8 @@
+/**
+ * gpio.c - "Arduino like" GPIO Fuction
+ * Copyright (c) 2018 Silgm. All right reserved.
+*/
+
 #include "gpio.h"
 #include <reg52.h>
 

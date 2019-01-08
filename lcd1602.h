@@ -1,3 +1,8 @@
+/**
+ * lcd1602.h - LCD1602 Module 
+ * Copyright (c) 2018 Silgm. All right reserved.
+*/
+
 #ifndef _LCD1602_H_
 #define _LCD1602_H_
 
@@ -45,12 +50,12 @@
 
 
 /**
- * LCD1602模块:
+ * LCD1602 Module:
  * 接线:
  * rs -> GPIO
  * enable -> GPIO
  * d4~47 -> GPIO
- * RW -> GND //千万不要忘记
+ * RW -> GND //Never Forget
 */
 
 typedef struct struct_lcd1602
