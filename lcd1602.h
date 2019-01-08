@@ -43,6 +43,16 @@
 #define LCD_5x10DOTS 0x04
 #define LCD_5x8DOTS 0x00
 
+
+/**
+ * LCD1602模块:
+ * 接线:
+ * rs -> GPIO
+ * enable -> GPIO
+ * d4~47 -> GPIO
+ * RW -> GND //千万不要忘记
+*/
+
 typedef struct struct_lcd1602
 {
 	Pin rs;
@@ -78,4 +88,5 @@ void Lcd1602_leftToRight(Lcd1602 *lcd);
 void Lcd1602_rightToLeft(Lcd1602 *lcd);
 void Lcd1602_autoscroll(Lcd1602 *lcd);
 void Lcd1602_noAutoscroll(Lcd1602 *lcd);
+
 #endif

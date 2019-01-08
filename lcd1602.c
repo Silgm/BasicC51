@@ -65,14 +65,14 @@ void Lcd1602_init(Lcd1602 *lcd)
 void Lcd1602_setCursor(Lcd1602 *lcd, uint8_t col, uint8_t row)
 {
 	if (row)
-		s_Lcd1602_Write(lcd, LCD_SETDDRAMADDR | (col), MODE_CMD);	
-	else
 		s_Lcd1602_Write(lcd, LCD_SETDDRAMADDR | (col + 0x40), MODE_CMD);	
+	else
+		s_Lcd1602_Write(lcd, LCD_SETDDRAMADDR | (col), MODE_CMD);	
 }
 
 void Lcd1602_print(Lcd1602 *lcd, const char *str)
 {
-	for (; *str; ++str)
+	for (; *str != '\0'; ++str)
 		s_Lcd1602_Write(lcd, *str, MODE_DATA);
 }
 
